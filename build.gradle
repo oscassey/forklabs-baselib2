@@ -1,0 +1,32 @@
+/*
+ * This is a general purpose Gradle build.
+ * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds/
+ */
+
+plugins {
+    id 'java-library'
+    id 'eclipse'
+}
+
+sourceCompatibility = 1.15
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    /* Lombok */
+    compileOnly('org.projectlombok:lombok:1.18.12')
+    annotationProcessor('org.projectlombok:lombok:1.18.12')
+
+    /* Tests */
+    testImplementation(platform('org.junit:junit-bom:5.7.0'))
+    testImplementation('org.junit.jupiter:junit-jupiter')
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
