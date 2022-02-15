@@ -6,6 +6,11 @@
 plugins {
     id 'java-library'
     id 'eclipse'
+    id 'maven-publish'
+}
+
+ext {
+    baselibVersion = '20220214'
 }
 
 sourceCompatibility = 1.15
@@ -28,5 +33,25 @@ test {
     useJUnitPlatform()
     testLogging {
         events "passed", "skipped", "failed"
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'ca.forklabs'
+            artifactId = 'forklabs-baselib2'
+            version = baselibVersion
+            from components.java
+
+            pom {
+                name = 'Forklabs Baselib2'
+                description = 'A new core library for my Forklabs applications'
+            }
+        }
+    }
+
+    repositories {
+        mavenLocal()
     }
 }
