@@ -1,5 +1,5 @@
 /*
- * Copyright (C)  2021  Forklabs Daniel Léonard
+ * Copyright (C)  2006  Forklabs Daniel Léonard
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,40 +16,24 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package ca.forklabs.baselib2.util;
-
-import java.util.Comparator;
-
-import ca.forklabs.baselib2.util.comparator.MagnitudeComparator;
+package ca.forklabs.baselib2.io;
 
 /**
- * Class {@code Comparators} provides factory methods for {@link Comparator}s.
+ * Class {@code ZeroInputStream} mimics <code>/dev/zero</code> on UNIX systems.
+ * This streams has an unlimited number of bytes that can be read, all of them
+ * with the value <em>0</em>. It does not support marking nor resetting.
  */
-public class Comparators {
+public class ZeroInputStream extends ConstantInputStream {
 
 //---------------------------
 // Constructor
 //---------------------------
 
     /**
-     * Let no one instantiate this class.
+     * Constructor.
      */
-    protected Comparators() {
-        // nothing
-    }
-
-
-//---------------------------
-// Class methods
-//---------------------------
-
-    /**
-     * Creates a new magnitude comparator.
-     * @return   a new comparator.
-     */
-    public static Comparator<Number> magnitude() {
-        var comparator = MagnitudeComparator.create();
-        return comparator;
+    public ZeroInputStream() {
+        super((byte) 0);
     }
 
 }

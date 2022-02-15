@@ -1,5 +1,5 @@
 /*
- * Copyright (C)  2021  Forklabs Daniel Léonard
+ * Copyright (C) 2006  Forklabs Daniel Léonard
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,40 +16,33 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package ca.forklabs.baselib2.util;
+package ca.forklabs.baselib2.io;
 
-import java.util.Comparator;
+import static ca.forklabs.baselib.junit.ResourceBundleTests.assertAllKeysArePresent;
 
-import ca.forklabs.baselib2.util.comparator.MagnitudeComparator;
+import java.util.Locale;
+
+import org.junit.jupiter.api.Test;
 
 /**
- * Class {@code Comparators} provides factory methods for {@link Comparator}s.
+ * Class {@code ResourcesTest} tests class {@link Resources}.
  */
-public class Comparators {
-
-//---------------------------
-// Constructor
-//---------------------------
+public class ResourcesTest {
 
     /**
-     * Let no one instantiate this class.
+     * Tests that all the keys are present.
+     * @throws   Exception   if anything goes wrong.
      */
-    protected Comparators() {
-        // nothing
-    }
+    @Test
+    public void testAreAllKeysPresent() throws Exception {
+        var clazz = Resources.class;
+        var bundle = Resources.getResourceBundle();
+        var locales = new Locale[] {
+            Locale.ENGLISH,
+            Locale.FRENCH,
+        };
 
-
-//---------------------------
-// Class methods
-//---------------------------
-
-    /**
-     * Creates a new magnitude comparator.
-     * @return   a new comparator.
-     */
-    public static Comparator<Number> magnitude() {
-        var comparator = MagnitudeComparator.create();
-        return comparator;
+        assertAllKeysArePresent(clazz, bundle, locales);
     }
 
 }
