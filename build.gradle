@@ -10,7 +10,7 @@ plugins {
 }
 
 ext {
-    baselibVersion = '20220214'
+    baselibVersion = '20221217'
 }
 
 sourceCompatibility = 1.15
